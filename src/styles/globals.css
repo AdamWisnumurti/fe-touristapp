@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
+/* "https://fonts.googleapis.com/css2?family=Poppins&display=swap" */
+/* <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap" rel="stylesheet"> */
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+    transition: background-color 600000s 0s, color 600000s 0s;
+}
+input[data-autocompleted] {
+    background-color: transparent !important;
+}
+
+.scrollbar-show::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+.scrollbar-show::-webkit-scrollbar:vertical {
+  width: 6px;
+}
+
+.scrollbar-show::-webkit-scrollbar-thumb {
+  border-radius: 12px;
+  border-width: 2px;
+  /* background-color: rgb(89 89 89 / var(--tw-text-opacity)); */
+  background-color: #5BB24A;
+  cursor: pointer;
+  /* border: 2px solid #2d3748; */
+}
+.scrollbar-show::-webkit-scrollbar-track {
+  border-radius: 12px;
+  border-width: 2px;
+  /* background-color: rgb(219, 219, 219); */
+  background: #E8E8E8
+  /* border: 2px solid #2d3748; */
+}
+
+/* For Firefox */
+.scrollbar-show {
+  scrollbar-width: thin;
+  scrollbar-color: #5BB24A
+  /* scrollbar-color: rgb(219, 219, 219); */
+}

@@ -1,0 +1,51 @@
+image: alpine:latest
+
+variables:
+  # KUBE_INGRESS_BASE_DOMAIN is the application deployment domain and should be set as a variable at the group or project level.
+  # KUBE_INGRESS_BASE_DOMAIN: domain.example.com
+
+  # Allows Container-Scanning to correctly correlate image names when using Jobs/Build.gitlab-ci.yml
+  CS_DEFAULT_BRANCH_IMAGE: $CI_REGISTRY_IMAGE/$CI_DEFAULT_BRANCH:$CI_COMMIT_SHA
+
+  POSTGRES_USER: user
+  POSTGRES_PASSWORD: testing-password
+  POSTGRES_DB: $CI_ENVIRONMENT_SLUG
+
+  DOCKER_DRIVER: overlay2
+
+  ROLLOUT_RESOURCE_TYPE: deployment
+
+  DOCKER_TLS_CERTDIR: "" # https://gitlab.com/gitlab-org/gitlab-runner/issues/4501
+
+  KUBE_NAMESPACE_DEV: tds
+  KUBE_NAMESPACE_UAT: uat-tds
+  CONTAINER_PORT: 3000
+
+workflow:
+  rules:
+    - when: always
+    - if: $CI_COMMIT_BRANCH == "dev"
+      variables:
+        AUTO_DEVOPS_BUILD_IMAGE_EXTRA_ARGS: "--build-arg=NEXT_PUBLIC_API_URL_STOKRUMAH=https://devstokrumah.tapera.go.id/api/v2"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      variables:
+        AUTO_DEVOPS_BUILD_IMAGE_EXTRA_ARGS: "--build-arg=NEXT_PUBLIC_API_URL_STOKRUMAH=https://stokrumah.uat.tapera.go.id/api/v2"
+
+stages:
+  - build
+  - test
+  - deploy-dev
+  - deploy-uat
+
+include:
+  - template: Jobs/Build.latest.gitlab-ci.yml
+  - template: Jobs/Code-Intelligence.gitlab-ci.yml
+  - template: Jobs/Secret-Detection.gitlab-ci.yml
+  - template: Jobs/License-Scanning.gitlab-ci.yml
+  - template: Jobs/SAST.gitlab-ci.yml
+  - project: infra/template-ci-tds
+    ref: main
+    file: deploy-dev/.gitlab-ci.yml
+  - project: infra/template-ci-tds
+    ref: main
+    file: deploy-uat/.gitlab-ci.yml
