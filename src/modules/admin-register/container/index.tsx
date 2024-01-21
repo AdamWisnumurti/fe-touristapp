@@ -53,7 +53,7 @@ export const AdminRegister = () => {
       <div className="inset-0 m-auto flex max-w-lg flex-col rounded-xl border border-neutral-20 bg-white p-5">
         <h1 className="text-2xl font-semibold text-neutral-90">Register</h1>
         <p className="mb-6 text-sm text-neutral-70">
-          Masukan Email dan kata sandi untuk masuk akun kamu
+          {/* Masukan Email dan kata sandi untuk masuk akun kamu */}
         </p>
         {/* <form onSubmit={loginKepesertaan}> */}
         <div
@@ -111,7 +111,9 @@ export const AdminRegister = () => {
                 confirmPassword: e.target.value,
               }))
             }
-            isError={data?.password !== data?.confirmPassword}
+            isError={
+              data.confirmPassword && data?.password !== data?.confirmPassword
+            }
             errorMessage="Confirmation password must be equal to password"
           />
           <Button

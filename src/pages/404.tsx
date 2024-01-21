@@ -28,11 +28,11 @@ export const PageNotFound404 = () => {
               />
             </svg>
             <h3 className="mb-5 pb-2 text-xl font-semibold text-neutral-100 dark:text-neutral-100">
-              Halaman tidak ditemukan
+              Page Not Found
             </h3>
             <div className="flex justify-center">
               <Button onClick={() => router.push('/')} size="md">
-                Kembali ke beranda
+                Back To Dashboard
               </Button>
             </div>
           </div>

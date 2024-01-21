@@ -1,4 +1,5 @@
 export * from './subheader';
+export * from './dropdown/dropdown-menu';
 export * from './form/input';
 export * from './form/button';
 export * from './form/button-edit';

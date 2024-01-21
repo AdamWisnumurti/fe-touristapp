@@ -32,17 +32,14 @@ export const AdminLogin = () => {
   return (
     <section className="h-full bg-neutral-10 py-[94px]">
       <div className="inset-0 m-auto flex max-w-lg flex-col rounded-xl border border-neutral-20 bg-white p-5">
-        <h1 className="text-2xl font-semibold text-neutral-90">
-          Selamat Datang
-        </h1>
+        <h1 className="text-2xl font-semibold text-neutral-90">Welcome</h1>
         <p className="mb-6 text-sm text-neutral-70">
-          Masukan Email dan kata sandi untuk masuk akun kamu
+          {/* Masukan Email dan kata sandi untuk masuk akun kamu */}
         </p>
-        {/* <form onSubmit={loginKepesertaan}> */}
         <div className="flex w-full flex-col space-y-6">
           <InputLabel
             label="Email"
-            placeholder="Input email"
+            placeholder="Input Email"
             value={data.username}
             onKeyPress={(e) => {
               if (e.key === 'Enter') {
@@ -74,13 +71,6 @@ export const AdminLogin = () => {
               }))
             }
           />
-          {/* <div className='flex justify-end'>
-          <Link
-            className='mb-4 mt-2 py-1 text-end text-sm font-semibold text-[#1389CD]'
-            href='/forget-password'>
-            Forget Password?
-          </Link>
-        </div> */}
           <Button
             onClick={loginUser}
             isLoading={isLoadingLogin}

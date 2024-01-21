@@ -163,6 +163,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     setToken('');
     setUserID('');
     setUserName('');
+    setDataProfile(null);
     setIsLoggedIn(false);
     localStorage.removeItem('access-token');
     localStorage.removeItem('user-id');

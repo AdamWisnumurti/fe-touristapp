@@ -1,12 +1,12 @@
 import React, { useState, useCallback } from 'react';
 import type { ITourist } from '@global/type';
 import Image from 'next/image';
-import { Button } from '@global/component';
-import { HiArrowLeft } from 'react-icons/hi';
 import {
+  Button,
   ModalDeleteTourist,
   ModalEditTourist,
-} from '@tourist-detail/component';
+} from '@global/component';
+import { HiArrowLeft } from 'react-icons/hi';
 import { useRouter } from 'next/router';
 
 export const TouristDetail = ({ data }: { data: ITourist }) => {
@@ -68,7 +68,7 @@ export const TouristDetail = ({ data }: { data: ITourist }) => {
               </Button>
               <span className="flex space-x-2">
                 <Button
-                  variant="secondary"
+                  variant="primary-outline"
                   size="sm"
                   classWrapper=" space-x-1"
                   onClick={() => toggleOpenModal('delete', data)}

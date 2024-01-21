@@ -38,7 +38,7 @@ export const Layout = ({
         }}
       />
       <NavBar />
-      <div className=" min-h-screen bg-neutral-10 text-neutral-800">
+      <div className=" min-h-screen bg-neutral-10 text-neutral-700">
         {children}
       </div>
       <FooterPengembang />

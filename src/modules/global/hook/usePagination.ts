@@ -32,7 +32,7 @@ export const usePagination = (
       .then((json) => {
         if (json) {
           setData(() => json.data?.data);
-          setPageCount(() => Math.ceil(json.data?.count?.totalLokasi / 1));
+          setPageCount(() => json.data?.total_pages);
         }
         setIsLoading(false);
       })
@@ -49,7 +49,8 @@ export const usePagination = (
       .then((json) => {
         if (json) {
           // setPageCount(() => json.pagination.totalRows);
-          setData(() => json.data);
+          setPageCount(() => json.data?.total_pages);
+          setData(() => json.data?.data);
         }
         setIsLoading(false);
       })

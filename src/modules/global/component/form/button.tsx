@@ -37,11 +37,11 @@ export const Button = ({
       case 'primary':
         return `text-white bg-primary hover:bg-opacity-90 disabled:text-neutral-40 disabled:bg-neutral-20 disabled:border-neutral-30 focus:outline-2 focus:ring-primary`;
       case 'primary-text':
-        return `text-primary bg-transparent hover:bg-secondary dark:bg-transparent dark:hover:bg-secondary disabled:opacity-60`;
+        return `text-primary bg-transparent hover:opacity-80 dark:bg-transparent dark:hover:bg-opacity-90 disabled:opacity-60`;
       case 'secondary':
-        return `text-primary bg-transparent  hover:bg-secondary dark:bg-transparent dark:hover:bg-secondary border border-primary`;
+        return `text-white bg-secondary hover:bg-opacity-90 disabled:text-neutral-40 disabled:bg-neutral-20 disabled:border-neutral-30 focus:outline-2 focus:ring-secondary`;
       case 'danger':
-        return `text-white bg-danger-100 dark:bg-danger-100 dark:hover:bg-secondary dark:focus:ring-danger-200 border border-danger-100 hover:border-danger-200`;
+        return `text-white bg-red-700 dark:bg-red-700 dark:hover:bg-opacity-90 dark:focus:ring-danger-200 border border-red-700 hover:border-red-300`;
       case 'white':
         return `text-white bg-transparent dark:bg-transparent disabled:opacity-60 border border-white`;
       case 'white-text':
@@ -49,11 +49,11 @@ export const Button = ({
       case 'gray':
         return `text-neutral-100 bg-neutral-20 dark:bg-neutral-20 disabled:opacity-60 border border-neutral-20`;
       case 'primary-outline':
-        return `bg-transparent text-primary outline outline-primary hover:bg-secondary focus:outline-2 focus:ring-primary dark:hover:bg-secondary dark:focus:ring-primary`;
+        return `bg-transparent text-primary outline outline-primary hover:bg-opacity-90 focus:outline-2 focus:ring-primary dark:hover:bg-opacity-90 dark:focus:ring-primary`;
       case 'danger-outline':
-        return `bg-white text-danger-100 outline outline-danger-100 hover:bg-secondary focus:outline-2 focus:ring-danger-200 dark:hover:bg-secondary dark:focus:ring-danger-200}`;
+        return `bg-white text-red-700 outline outline-red-700 hover:bg-opacity-90 focus:outline-2 focus:ring-red-300 dark:hover:bg-opacity-90 dark:focus:ring-red-300}`;
       default:
-        return `text-white bg-primary hover:bg-secondary dark:bg-primary dark:hover:bg-secondary dark:focus:ring-primary focus:ring-primary `;
+        return `text-white bg-primary hover:bg-opacity-90 dark:bg-primary dark:hover:bg-opacity-90 dark:focus:ring-primary focus:ring-primary `;
     }
   }, [variant]);
   const baseClass =

@@ -1,9 +1,8 @@
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import router, { useRouter } from 'next/router';
 import React from 'react';
-// import { navMenu} from '@global/data';
 import { HiUserCircle, HiChevronDown } from 'react-icons/hi';
-import { DropdownMenu } from '@global/component/dropdown';
+import { Button, DropdownMenu } from '@global/component';
 import { useAuth } from '@global/hook';
 import Image from 'next/image';
 import { MdOutlineLogout } from 'react-icons/md';
@@ -25,7 +24,7 @@ const ProfileSection = ({
           <div className="text-primary">
             <HiUserCircle size={20} />
           </div>
-          <div className="ml-1 text-neutral-70">Lihat Profil</div>
+          <div className="ml-1 text-neutral-70">Profile</div>
         </div>
       ),
       action: () => {
@@ -38,7 +37,7 @@ const ProfileSection = ({
           <div className="text-primary">
             <MdOutlineLogout size={20} className="text-red-600" />
           </div>
-          <div className="ml-1 text-neutral-70">Keluar</div>
+          <div className="ml-1 text-neutral-70">Logout</div>
         </div>
       ),
       action: () => {
@@ -47,7 +46,7 @@ const ProfileSection = ({
     },
   ];
 
-  function getInitialUserName(str: string) {
+  const getInitialUserName = (str: string) => {
     const firstLetters = str
       .split(' ')
       .slice(0, 2)
@@ -55,7 +54,7 @@ const ProfileSection = ({
       .join('');
 
     return firstLetters;
-  }
+  };
 
   return (
     <DropdownMenu
@@ -94,18 +93,44 @@ export const NavBar = () => {
       <div className="flex items-center md:space-x-8">
         <Link href="/" className="flex">
           <div className="cursor-pointer">
-            <h1 className="text-primary">Cakra Travel</h1>
+            <h1 className="text-primary">
+              <span className="text-2xl font-black">Cakra</span>{' '}
+              <span className="text-xl font-semibold text-secondary">
+                Travel
+              </span>
+            </h1>
           </div>
         </Link>
       </div>
       <div>
-        <div className="flex rounded-lg border p-1 text-sm">
-          <ProfileSection
-            image={dataProfile?.avatar || ''}
-            userName={dataProfile?.name || ''}
-            logout={logout}
-          />
-        </div>
+        {dataProfile?.name ? (
+          <div className="flex rounded-lg border p-1 text-sm">
+            <ProfileSection
+              image={dataProfile?.avatar || ''}
+              userName={dataProfile?.name || ''}
+              logout={logout}
+            />
+          </div>
+        ) : (
+          <div className="flex items-center space-x-4">
+            <Button
+              size="sm"
+              variant="primary-outline"
+              className="border-[#D9D9D9]"
+              onClick={() => router.push('/register')}
+            >
+              Register
+            </Button>
+            <Button
+              size="sm"
+              variant="primary"
+              className="border-[#D9D9D9]"
+              onClick={() => router.push('/login')}
+            >
+              Login
+            </Button>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -19,27 +19,24 @@ export const Pagination = ({
   setPageIndex,
   pageCount,
 }: IPagination) => {
+  console.log(Number(pageCount));
   const handlePageIndex = useCallback(
     (index: number) => {
       setPageIndex(index);
     },
     [setPageIndex],
   );
-
   const handleFirst = useCallback(() => {
     setPageIndex(1);
   }, [setPageIndex]);
-
   const handleLast = useCallback(() => {
     setPageIndex(pageCount);
   }, [setPageIndex, pageCount]);
-
   const handlePrevious = useCallback(() => {
     if (pageIndex !== 1) {
       setPageIndex(pageIndex - 1);
     }
   }, [pageIndex, setPageIndex]);
-
   const handleNext = useCallback(() => {
     if (pageIndex !== pageCount) {
       setPageIndex(pageIndex + 1);
@@ -47,17 +44,26 @@ export const Pagination = ({
   }, [pageIndex, pageCount, setPageIndex]);
 
   const listPages = useCallback((index: number, count: number) => {
-    if (index < 3) {
-      return [1, 2, 3, 4, 5];
+    if (count < 2) {
+      const arr = [];
+      for (let i = 1; i <= count; i += 1) {
+        arr.push(index);
+      }
+      return arr;
+    }
+    if (index < 2) {
+      return [1, 2, 3];
     }
     if (index > count - 3) {
-      return [count - 4, count - 3, count - 2, count - 1, count];
+      // return [count - 4, count - 3, count - 2, count - 1, count];
+      return [count - 2, count - 1, count];
     }
-    return [index - 2, index - 1, index, index + 1, index + 2];
+    // return [index - 2, index - 1, index, index + 1, index + 2];
+    return [index - 1, index, index + 1];
   }, []);
 
   return (
-    <div className="grid w-full place-items-center overflow-x-scroll rounded-lg py-8 lg:overflow-visible">
+    <div className="grid w-full place-items-center overflow-x-scroll rounded-lg lg:overflow-visible">
       <ul className="flex items-center space-x-3">
         <li>
           <span
@@ -65,7 +71,7 @@ export const Pagination = ({
               pageIndex > 1
                 ? 'text-primary cursor-pointer'
                 : 'text-neutral-40 cursor-not-allowed',
-              'mx-1 flex items-center justify-center rounded bg-transparent p-0 text-sm transition duration-150 ease-in-out',
+              'flex items-center justify-center rounded bg-transparent p-0 text-sm transition duration-150 ease-in-out',
             )}
             aria-label="Prev"
             onClick={handleFirst}
@@ -80,7 +86,7 @@ export const Pagination = ({
               pageIndex > 1
                 ? 'text-primary cursor-pointer'
                 : 'text-neutral-40 cursor-not-allowed',
-              'mx-1 flex items-center justify-center rounded bg-transparent p-0 text-sm transition duration-150 ease-in-out',
+              'flex items-center justify-center rounded bg-transparent p-0 text-sm transition duration-150 ease-in-out',
             )}
             aria-label="Prev"
             onClick={handlePrevious}
@@ -88,6 +94,32 @@ export const Pagination = ({
             <HiMiniChevronLeft size={20} />
           </span>
         </li>
+
+        {pageIndex > 2 && (
+          <li>
+            <span
+              className={twMerge(
+                'border-neutral-20 bg-white text-neutral-60 flex h-9 min-w-[37px] px-3 cursor-pointer border items-center justify-center rounded py-0 text-sm transition duration-150 ease-in-out',
+              )}
+              aria-label="Prev"
+              onClick={() => handlePageIndex(1)}
+            >
+              1
+            </span>
+          </li>
+        )}
+        {pageIndex > 2 && (
+          <li>
+            <span
+              className={twMerge(
+                ' text-neutral-60 flex min-w-[10px] items-end justify-end rounded py-0 text-sm transition duration-150 ease-in-out',
+              )}
+              aria-label="Prev"
+            >
+              ....
+            </span>
+          </li>
+        )}
 
         {listPages(pageIndex, pageCount).map((item, key) => {
           return (
@@ -97,7 +129,7 @@ export const Pagination = ({
                   pageIndex === item
                     ? 'bg-primary border-primary text-white cursor-pointer'
                     : 'border-neutral-20 bg-white text-neutral-60',
-                  'mx-1 flex h-9 min-w-[37px] px-3 cursor-pointer border items-center justify-center rounded py-0 text-sm transition duration-150 ease-in-out',
+                  'flex h-9 min-w-[37px] px-3 cursor-pointer border items-center justify-center rounded py-0 text-sm transition duration-150 ease-in-out',
                 )}
                 aria-label="Prev"
                 onClick={() => handlePageIndex(item)}
@@ -108,13 +140,39 @@ export const Pagination = ({
           );
         })}
 
+        {pageIndex < pageCount - 1 && (
+          <li>
+            <span
+              className={twMerge(
+                ' text-neutral-60 flex min-w-[10px] items-end justify-end rounded py-0 text-sm transition duration-150 ease-in-out',
+              )}
+              aria-label="Prev"
+            >
+              ....
+            </span>
+          </li>
+        )}
+        {pageIndex < pageCount - 1 && (
+          <li>
+            <span
+              className={twMerge(
+                'border-neutral-20 bg-white text-neutral-60 flex h-9 min-w-[37px] px-3 cursor-pointer border items-center justify-center rounded py-0 text-sm transition duration-150 ease-in-out',
+              )}
+              aria-label="Prev"
+              onClick={() => handlePageIndex(pageCount)}
+            >
+              {pageCount}
+            </span>
+          </li>
+        )}
+
         <li>
           <span
             className={twMerge(
               pageIndex !== pageCount
                 ? 'text-primary cursor-pointer'
                 : 'text-neutral-40 cursor-not-allowed',
-              'mx-1 flex cursor-pointer items-center justify-center rounded bg-transparent p-0 text-sm transition duration-150 ease-in-out',
+              'flex cursor-pointer items-center justify-center rounded bg-transparent p-0 text-sm transition duration-150 ease-in-out',
             )}
             aria-label="Next"
             onClick={handleNext}
@@ -129,7 +187,7 @@ export const Pagination = ({
               pageIndex !== pageCount
                 ? 'text-primary cursor-pointer'
                 : 'text-neutral-40 cursor-not-allowed',
-              'mx-1 flex cursor-pointer items-center justify-center rounded bg-transparent p-0 text-sm transition duration-150 ease-in-out',
+              'flex cursor-pointer items-center justify-center rounded bg-transparent p-0 text-sm transition duration-150 ease-in-out',
             )}
             aria-label="Next"
             onClick={handleLast}
