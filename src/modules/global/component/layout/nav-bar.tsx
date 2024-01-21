@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import router, { useRouter } from 'next/router';
+import router from 'next/router';
 import React from 'react';
 import { HiUserCircle, HiChevronDown } from 'react-icons/hi';
 import { Button, DropdownMenu } from '@global/component';
@@ -16,7 +16,6 @@ const ProfileSection = ({
   userName: string;
   logout: () => void;
 }) => {
-  const router = useRouter();
   const listMenu = [
     {
       label: (

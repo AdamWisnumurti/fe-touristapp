@@ -19,24 +19,27 @@ export const Pagination = ({
   setPageIndex,
   pageCount,
 }: IPagination) => {
-  console.log(Number(pageCount));
   const handlePageIndex = useCallback(
     (index: number) => {
       setPageIndex(index);
     },
     [setPageIndex],
   );
+
   const handleFirst = useCallback(() => {
     setPageIndex(1);
   }, [setPageIndex]);
+
   const handleLast = useCallback(() => {
     setPageIndex(pageCount);
   }, [setPageIndex, pageCount]);
+
   const handlePrevious = useCallback(() => {
     if (pageIndex !== 1) {
       setPageIndex(pageIndex - 1);
     }
   }, [pageIndex, setPageIndex]);
+
   const handleNext = useCallback(() => {
     if (pageIndex !== pageCount) {
       setPageIndex(pageIndex + 1);
